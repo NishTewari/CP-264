@@ -11,7 +11,7 @@ Version  2021-03-05
  */
 
 #include <stdio.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include "common.h"
 
 NODE *new_node(int data, int type) {

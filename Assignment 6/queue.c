@@ -16,13 +16,10 @@ Version  2021-03-05
 
 void enqueue(QUEUE *qp, NODE *np) {
     // your implementation
-    if (qp->front == NULL || qp->rear == NULL)
-    {
+    if (qp->front == NULL || qp->rear == NULL){
         qp->front = np;
         qp->rear = np;
-    }
-    else    //Add to the rear 
-    {
+    }else{      
         qp->rear->next = np;
         qp->rear = np;
     }
@@ -43,8 +40,7 @@ void clean_queue(QUEUE *qp) {
     NODE *curr = qp->front;
     NODE *prev = NULL;
 
-    while (curr != NULL)
-    {
+    while (curr != NULL){
         prev = curr;
         curr = curr->next;
         free(prev);

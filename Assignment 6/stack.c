@@ -25,6 +25,7 @@ void push(STACK *sp, NODE *np) {
 NODE *pop(STACK *sp) {
     // your implementation
     if(sp->top == NULL) return NULL; 
+    
     NODE *np = sp -> top;
     sp->top = sp->top->next;
     np->next = NULL; 
