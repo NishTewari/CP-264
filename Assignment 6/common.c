@@ -9,6 +9,7 @@ Email:   tewa4430@mylaurier.ca
 Version  2021-03-05
 -------------------------------------
  */
+
 #include <stdio.h>
 #include <malloc.h>
 #include "common.h"
