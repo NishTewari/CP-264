@@ -45,54 +45,48 @@ int type(char c) {
 }
 
 QUEUE infix_to_postfix(char *infixstr) {
-  // your implementation
-  int index = 0;
-	char *p = infixstr;
-	QUEUE queue = { 0 };
-	STACK stack = { 0 };
-	int sign = 1, num = 0;
-	NODE *temp = { 0 }; 
-	while (*p) {	
-		int curr_type = type(*p);
-		if (*p == '-' && (p == infixstr || *(p - 1) == '('))
-			sign = -1;
-		else if (curr_type == 0) { 
-			num = *p - '0';
-			while (type(*(p + 1)) == 0) {
-				num = num * 10 + *(p + 1) - '0';
-				p++;
-			}
-			enqueue(&queue, new_node(sign * num, 0));
-			sign = 1;
-		} else if (curr_type == 1) { 
-		
-			while (stack.top
-					&& get_priority(*p)
-							< get_priority((temp = pop(&stack))->data)) {
-				if (temp->type != 2 && temp->type != 3)
-					enqueue(&queue, temp);
-			}
-			if (temp && get_priority(*p) >= get_priority(temp->data)) {
-				push(&stack, temp);
-			}
-			push(&stack, new_node(*p, type(*p)));
-		} else if (curr_type == 2) { 
-			push(&stack, new_node(*p, type(*p)));
-		} else if (curr_type == 3) { 
-			
-			while (stack.top && (temp = pop(&stack))->type != 2) {
-				enqueue(&queue, temp);
-			}
-		}
-		p++;
-		index++;
-	}	
-	while (stack.top)
-		  enqueue(&queue, pop(&stack));
-	clean_stack(&stack);
-	return queue;
-}
+	QUEUE queue = {0};
+  STACK stack = {0};
+  int multiplier = 1; 
+  int n = 0; 
+  char *c = infixstr;
+  while(*c) {
+      if(*c == '-' && (c == infixstr || *(c - 1) == '('))
+          multiplier = -1;
 
+      else if(*c >= '0' && *c <= '9' ) {
+          n = *c - '0';
+          while(*(c + 1) >= '0' && *(c + 1) <= '9') {
+              n = n * 10 + (*(c + 1) - '0');
+              c++;
+          }
+          enqueue(&queue, new_node(multiplier * n, 0)); 
+          multiplier = 1;
+
+        }else if (*c == '(') 
+            push(&stack, new_node(*c, 2)); 
+
+        else if (*c == ')') {
+            int a = 0;
+            while(a == 0) {
+                NODE *op = pop(&stack);
+                if (op->data != '(')
+                    enqueue(&queue, op);
+                else
+                    a = 1;
+            }
+        } else if (type(*c) == 1) 
+            push(&stack, new_node(*c, 1));
+
+        c++;
+    }
+
+    while (stack.top)
+        enqueue(&queue, pop(&stack));
+
+    return queue;
+
+}
 
 int evaluate_postfix(QUEUE queue) {
   // your implementation
@@ -127,11 +121,9 @@ int evaluate_postfix(QUEUE queue) {
 
 }
 
-
 int evaluate_prefix(char *infixstr) {
-  // your implementation
-  QUEUE qb = infix_to_postfix(infixstr);
-	int result = evaluate_postfix(qb);
-	clean_queue(&qb);
-	return result;
+  	// your implementation
+  	QUEUE queue = infix_to_postfix(infixstr);
+    int result = evaluate_postfix(queue);
+    return result;
 }

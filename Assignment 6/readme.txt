@@ -31,7 +31,7 @@ Q3.1 infix_to_postfix()                   [6/6/*]
 Q3.2 evaluate_postfix()                   [6/6/*]
 Q3.3 evaluate_prefix()                    [2/2/*]
 
-Total:                                   [0/30/*]
+Total:                                   [30/30/*]
 
 Copy and paste the console output of your public test in the following. This will help markers to evaluate your program if it fails the testing.  
 
