@@ -1,4 +1,4 @@
-Name: Nishant Tewari
+Name: Nish Tewari
 ID: 190684430
 Email: tewa4430@mylaurier.ca
 WorkID: CP264-a7

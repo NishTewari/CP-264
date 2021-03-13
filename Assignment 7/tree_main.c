@@ -17,7 +17,7 @@ void search_info(char *sf, char key, TNODE *tnp){
 }
 
 int main() {
-  // create nodes	
+  //create nodes	
   TNODE *a = new_node('A');
   TNODE *b = new_node('B');
   TNODE *c = new_node('C');

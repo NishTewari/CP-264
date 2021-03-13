@@ -136,7 +136,6 @@ void clean_tree(TNODE **rootp) {
   *rootp = NULL;
 }
 
-
 // queue functions adapted and modified from a6
 void enqueue(QUEUE *qp, void *data) {
    QNODE *p = (QNODE*) malloc(sizeof(QNODE));

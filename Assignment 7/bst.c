@@ -20,15 +20,14 @@ TNODE* search(TNODE *root, char *name) {
             return root;
         else if (strcmp(root->data.name, name) > 0)
             root = root->left;
-        else root = root->right;
-        
+        else root = root->right; 
     }
     return NULL;
 }
 
 
 void insert(TNODE **rootp, char *name, float score) {
-// your implementation
+    // your implementation
 if (!*rootp)
     {
         RECORD data = {0};
@@ -53,9 +52,8 @@ if (!*rootp)
 }
 
 void delete(TNODE **rootp, char *name) {
-// your implementation
+    // your implementation
 if (!*rootp) return;
-
     TNODE *tmp = NULL;
 
     if (strcmp(name, (*rootp)->data.name) == 0)
@@ -96,7 +94,6 @@ if (!*rootp) return;
 TNODE *extract_smallest_node(TNODE **rootp) {
 // your implementation
  if (!*rootp) return NULL;
-
     if (!(*rootp)->left)
         return *rootp;
     else

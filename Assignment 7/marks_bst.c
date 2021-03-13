@@ -54,7 +54,6 @@ if (search(dsp->bst, name))
     printf("::> %s not found!\n", name);
 }
 
-
 // the following are adopted and modified from previous assignments
 char letter_grade(float s){
   char r = 'F';
