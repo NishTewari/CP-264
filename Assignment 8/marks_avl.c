@@ -17,17 +17,32 @@ void merge_tree(TNODE **rootp1, TNODE **rootp2) {
 // your implementation
 // use recursive algorithm to traverse tree rootp2, 
 // get data of each node and insert into rootp1
+if (*rootp2 == NULL){
+    return;
+}
+else{
+    insert(rootp1, (*rootp2)->data.name, (*rootp2)->data.score);
+    merge_tree(rootp1, &(*rootp2)->left);
+    merge_tree(rootp1, &(*rootp2)->right);
+  }
 }
 
 void merge_data(MARKS *ds1, MARKS *ds2) {
 // your implementation
 // call the merge_tree function to merge ds2->bst into da1->bst
 // update the stats of the merged data set using the stats of ds1 and ds2. 
+  float mean;
+  int count;
+  merge_tree(&ds1->bst,&ds2->bst);
+  mean = ds1->mean;
+  count = ds1->count;
+  ds1->count = ds1->count + ds2->count;
+  ds1->mean = (ds1->mean * count + ds2->mean * ds2->count) / ds1->count;
+  ds1->stddev = sqrt(((float)1 / ds1->count) *(ds1->stddev * ds1->stddev * count + mean * mean * count + ds2->stddev * ds2->stddev * ds2->count + ds2->mean * ds2->mean * ds2->count) - ds1->mean * ds1->mean);
+
 }
 
-
 // the following are adapted from marks_bst.c of A7Q2
-
 
 void display_stats(MARKS *sd) {
   printf("\nStatistics summary\n");

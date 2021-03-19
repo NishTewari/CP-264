@@ -106,16 +106,26 @@ void insert(TNODE **rootp, char *name, float score)
   else return ;
 
   // 2. update height of this root node
-  
-  // add your code here
+  root->height = 1 + max(height(root->left), height(root->right));
 
   // 3. Get the balance factor of this ancestor node to check whether this node became unbalanced
-  
-  // add your code here
+  int bf = balance_factor(root);
   
   // 4. re-balance if not balanced
-      
-  // add your code here
+  if (bf == 2 && balance_factor(root->left) >= 0) {
+    *(rootp) = rotate_right(root);
+  }      
+  if (bf == 2 && balance_factor(root->left) < 0){
+    root->left = rotate_left(root->left);
+    *(rootp) =  rotate_right(root);
+  }
+  if (bf == -2 && balance_factor(root->right) <= 0)
+    *(rootp) =  rotate_left(root);
+
+  if (bf == -2 && balance_factor(root->right) > 0){
+    root->right = rotate_right(root->right);
+    *(rootp) =  rotate_left(root);
+  }
   
 }
 
@@ -159,17 +169,27 @@ void delete(TNODE **rootp, char *name)
   root = *rootp;
   
   // STEP 2: update the this root node's height
-  
-  // add your code here
+  root->height = 1 + max(height(root->left), height(root->right));
 
   // STEP 3: get the balance factor of this root node
-  
-  
-  // add your code here
+    int bf = balance_factor(root);
 
   // STEP 4: re-balance if not balanced
     
-  // add your code here
+  if (bf == 2 && balance_factor(root->left) >= 0) {
+    *rootp = rotate_right(root);
+  }
+  if (bf == 2 && balance_factor(root->left) < 0){
+    root->left =  rotate_left(root->left);
+    *rootp = rotate_right(root);
+  }
+  if (bf== -2 && balance_factor(root->right) <= 0)
+    *rootp = rotate_left(root);
+
+  if (bf == -2 && balance_factor(root->right) > 0){
+    root->right = rotate_right(root->right);
+    *rootp = rotate_left(root);
+  }
 }
 
 

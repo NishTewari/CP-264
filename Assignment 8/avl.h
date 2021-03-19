@@ -35,7 +35,7 @@ TNODE *rotate_right(TNODE *root);
 void insert(TNODE **rootp, char *name, float score);
 
 /* delete node of data.name from the AVL */ 
-void delete(TNODE **rootp, char *name);  // 
+void delete(TNODE **rootp, char *name);  
 
 // following functions are from a7
 TNODE *extract_smallest_node(TNODE **rootp); 

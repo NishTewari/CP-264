@@ -9,6 +9,9 @@ __updated__ = "2021-03-19"
 #ifndef MARSAVL_H
 #define MARSAVL_H
 
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include "avl.h"
 
 typedef struct mark_stats {
