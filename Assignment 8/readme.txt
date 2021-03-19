@@ -95,7 +95,6 @@ delete(&root, E):
 is_val(&root):1
 
 
-
 Q2 output:
 Load data from file marks.txt.1
 Bodnar         93.6

@@ -23,11 +23,9 @@ int height(TNODE *np){
     return 0;
   }
   return np->height;
-
 }
 
 int balance_factor(TNODE* np) {
-
   // your implementation
   if (np == NULL)
   {
@@ -82,8 +80,7 @@ TNODE *rotate_left(TNODE *x){
   return y;
 }
 
-void insert(TNODE **rootp, char *name, float score)
-{
+void insert(TNODE **rootp, char *name, float score){
   TNODE *np = (TNODE *) malloc(sizeof(TNODE));
   if (np == NULL) return;
   strcpy(np->data.name, name);
@@ -125,12 +122,10 @@ void insert(TNODE **rootp, char *name, float score)
   if (bf == -2 && balance_factor(root->right) > 0){
     root->right = rotate_right(root->right);
     *(rootp) =  rotate_left(root);
-  }
-  
+  }  
 }
 
-void delete(TNODE **rootp, char *name)
-{
+void delete(TNODE **rootp, char *name){
   TNODE *root = *rootp;
   TNODE* np;
 
@@ -162,7 +157,6 @@ void delete(TNODE **rootp, char *name)
       delete(&root->right, name);
     }
   }
-
     // If the tree had only one node then return
   if (*rootp == NULL) return;
 

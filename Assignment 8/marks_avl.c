@@ -39,7 +39,6 @@ void merge_data(MARKS *ds1, MARKS *ds2) {
   ds1->count = ds1->count + ds2->count;
   ds1->mean = (ds1->mean * count + ds2->mean * ds2->count) / ds1->count;
   ds1->stddev = sqrt(((float)1 / ds1->count) *(ds1->stddev * ds1->stddev * count + mean * mean * count + ds2->stddev * ds2->stddev * ds2->count + ds2->mean * ds2->mean * ds2->count) - ds1->mean * ds1->mean);
-
 }
 
 // the following are adapted from marks_bst.c of A7Q2
@@ -128,7 +127,6 @@ void import_data(MARKS *ds, char *filename) {
       insert(&ds->bst, name, score);
     }
   }
-  
   ds->count = count;
   mean /= count; 
   ds->mean = mean;

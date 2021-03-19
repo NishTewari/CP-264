@@ -3,11 +3,10 @@
 Project: cp264-a8q2
 File:    avl_markstats_main.c
 Description: test driver program
-Author:  HBF  
-Version: 2020-03-03
+Author:  Nish Tewari  
+Version: 2021-03-19
 --------------------------------------------------
 */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

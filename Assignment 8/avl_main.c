@@ -41,7 +41,6 @@ int main(int argc, char* args[])
 	  printf("is_val(&root):%d\n\n", is_avl(root));
     }
   }
-  
   clean_tree(&root);
   return 0;
 }
