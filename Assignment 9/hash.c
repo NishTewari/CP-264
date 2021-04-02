@@ -4,6 +4,7 @@ Author: Nishant Tewari
 ID:     190684430
 Email:  tewa4430@mylaurier.ca
 __updated__ = "2021-04-02"
+✔
 -----------------------------------------------
 */ 
 #include <stdio.h>
@@ -20,8 +21,8 @@ int hash(char* word) {
 }
 
 HTNODE *new_hashnode(char *name, int value) {
-// your implementation
-  hashnode *nhn=(hashnode *)malloc(sizeof(hashnode));
+  // your implementation
+  HTNODE *nhn=(HTNODE *)malloc(sizeof(HTNODE));
   nhn->value = value;
   strcpy(nhn->name, name);
   nhn->next = NULL;
@@ -29,19 +30,86 @@ HTNODE *new_hashnode(char *name, int value) {
 }
 
 HASHTABLE *new_hashtable(int size) {
-// your implementation
+    // your implementation
+    HASHTABLE *htable = (HASHTABLE *) malloc(sizeof(HASHTABLE));
+    htable->size = size;
+    htable->count = 0;
+    htable->hnp = (HTNODE **) malloc(sizeof(HTNODE) * size);
+    for (int i = 0; i < size; i++)
+        htable->hnp[i] = NULL;
+    return htable;
 }
 
 HTNODE *search(HASHTABLE *ht, char *name) { 
 // your implementation
+    int index = hash(name);
+    if (ht->hnp[index])
+    {
+        HTNODE *tmp = ht->hnp[index];
+        while (tmp)
+        {
+            if (strcmp(tmp->name, name) == 0)
+                return tmp;
+            tmp = tmp->next;
+        }
+    }
+    return NULL;
 }
 
 int insert(HASHTABLE *ht, HTNODE *np) {
-// your implementation
+    // your implementation
+    int index = hash(np->name);
+    if (ht->hnp[index])
+    {
+        HTNODE *tmp = ht->hnp[index];
+        while (tmp)
+        {
+            if (strcmp(tmp->name, np->name) == 0)
+            {
+                tmp->value = np->value;
+                return 0;
+            }
+            tmp = tmp->next;
+        }
+        tmp = np;
+        ht->count++;
+        return 1;
+    }
+    ht->hnp[index] = np;
+    ht->count++;
+    return 1;
 }
 
 int delete(HASHTABLE *ht, char *name) {
 // your implementation
+int i = hash(name);
+    HTNODE *current = *(ht->hnp + i);
+    HTNODE *prev = NULL;
+    if (current == NULL)
+    {
+        return 0;
+    }
+    else
+    {
+        while (current && strcmp(name,current->name)!= 0)
+        {
+            prev = current;
+            current = current->next;
+        }
+        if (strcmp(name,current->name) == 0)
+        {
+            if (prev != NULL)
+            {
+                prev->next = current->next;
+            }
+            else
+            {
+                *(ht->hnp + i) = NULL;
+                ht->count--;
+            }
+        }
+        return 0;
+}
 }
 
 
