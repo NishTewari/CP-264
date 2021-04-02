@@ -4,9 +4,9 @@ File:     stack.c
 Description: implementation of stack.h
 Author:  HBF  
 Version: 2021-02-24
+✔
 --------------------------------------------------
 */
-
 #include <stdio.h>
 #include "stack.h"
 

@@ -4,7 +4,8 @@ File:    queue.h
 Description: header of queue data structure, using linked list common.h
 Author:  HBF  
 Version: 2021-02-24
---------------------------------------------------
+✔
+---------------------------------------------------
 */
 #ifndef QUEUE_H
 #define QUEUE_H

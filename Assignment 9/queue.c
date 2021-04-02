@@ -4,7 +4,8 @@ File:    queue.c
 Description: implementation of queue.h
 Author:  HBF  
 Version: 2020-02-13
---------------------------------------------------
+✔
+---------------------------------------------------
 */
 
 #include <stdio.h>
