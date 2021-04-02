@@ -1,11 +1,11 @@
-/*--------------------------------------------------
+/*---------------------------------------------------
 Project: CP264-a6
 File:   stack.h
 Description: header of stack data structure, using linked list common.h
 Author:  HBF  
 Version: 2021-02-24
 ✔
---------------------------------------------------
+---------------------------------------------------
 */
 #ifndef STACK_H
 #define STACK_H

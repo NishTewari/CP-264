@@ -1,11 +1,11 @@
 /*
------------------------------------------------
+------------------------------------------------
 Author: Nishant Tewari
 ID:     190684430
 Email:  tewa4430@mylaurier.ca
 __updated__ = "2021-04-02"
 ✔
------------------------------------------------
+------------------------------------------------
 */ 
 #include <stdio.h>
 #include <string.h>
@@ -111,7 +111,6 @@ int i = hash(name);
         return 0;
 }
 }
-
 
 // you can use this function in your program
 void clean_hash(HASHTABLE **htp) {

@@ -1,10 +1,10 @@
-/*--------------------------------------------------
+/*---------------------------------------------------
 Project: CP264-a6
 File:    common.h
 Description: node structure and functions for linked list queue and stack
 Author:  HBF  
 Version: 2021-02-24
----------------------------------------------------
+----------------------------------------------------
 */
 #ifndef COMMON_H
 #define COMMON_H
