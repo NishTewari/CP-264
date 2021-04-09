@@ -12,8 +12,7 @@ Version: 2021-04-09
 #include "algorithm.h"
 
 EDGELIST *mst_prim(GRAPH *g, int start) {
-    // your implementation
-    if (g == NULL)
+	if (g == NULL)
 		return NULL;
 	int i, heapindex, n = g->order, tree[n], parent[n];
 	HNODE hn;

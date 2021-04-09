@@ -4,144 +4,126 @@ Author: Nishant Tewari
 ID:     190684430
 Email:  tewa4430@mylaurier.ca
 __updated__ = "2021-04-02"
-✔
 -------------------------------------------------
 */ 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h> 
 #include "heap.h"
+#include <math.h>
 
-HEAP *new_heap(int capacity){
-    // your implementation
-  HEAP *new_heap=(HEAP *)malloc(sizeof(HEAP));
-	new_heap->size=0;
-	new_heap->capacity=capacity;
-	new_heap->hnap=(HNODE *)malloc(sizeof(HNODE)*capacity);
-	return (new_heap);
-
+HEAP *new_heap(int capacity) {
+	HEAP *nheap = (HEAP *) malloc(sizeof(HEAP));
+	nheap->capacity = capacity;
+	nheap->size = 0;
+	nheap->hnap = (HNODE *) malloc(sizeof(HNODE) * capacity);
+	return nheap;
 }
 
-void insert(HEAP *heap, HNODE new_node)
-{
-  // your implementation
-if (!heap) return;
-  if (heap->size == heap->capacity)
-  {
-    HNODE *temp;
-
-    heap->capacity *= 2; 
-    temp = realloc(heap->hnap, sizeof(HNODE) * heap->capacity);
-    if (temp) 
-    {
-      heap->hnap = temp;
-      display_heap(heap);
-    } else  
-    {
-      temp = malloc(sizeof(HNODE) * heap->capacity);
-      if (temp)
-      {
-        memcpy(temp, heap->hnap, sizeof(HNODE) * heap->size);
-        free(heap->hnap);
-        heap->hnap = temp;
-      } else
-      {
-        printf("Array resize failed!\n");
-      }
-    }
-  }
-  heap->hnap[heap->size] = new_node;
-  heap->size++;
-  int curr_index = heap->size - 1;
-  int parent_index = (curr_index - 1) / 2;
-  while (cmp(heap->hnap[curr_index].key, heap->hnap[parent_index].key) == -1)
-  {
-    HNODE temp = heap->hnap[curr_index];
-    heap->hnap[curr_index] = heap->hnap[parent_index];
-    heap->hnap[parent_index] = temp;
-    curr_index = parent_index;
-    parent_index = (curr_index - 1) / 2;
-  }
-}
-
-HNODE extract_min(HEAP *heap)
-{
-  //Your implementation 
-HNODE *nh=(HNODE *)malloc(sizeof(HNODE));
-	if(heap->size!=0){
-		if((heap->capacity/heap->size)<=0.25){
-			heap->hnap=realloc(heap->hnap,sizeof(HNODE)*((heap->capacity-heap->size)/2));
+void insert(HEAP *heap, HNODE new_node) {
+	if (!heap)
+		return;
+	if (heap->size == heap->capacity) {
+		HNODE *temp;
+		heap->capacity *= 2;  // Double the current capacity
+		temp = realloc(heap->hnap, sizeof(HNODE) * heap->capacity);
+		if (temp) {  // Reallocation successful
+			heap->hnap = temp;
+		} else {  // Unable to reallocate
+			temp = malloc(sizeof(HNODE) * heap->capacity);
+			if (temp) {  // Copy previous contents to new memory space
+				memcpy(temp, heap->hnap, sizeof(HNODE) * heap->size);
+				free(heap->hnap);
+				heap->hnap = temp;
+			} else
+				printf("Array resize failed!\n");
 		}
-		*(nh)=heap->hnap[0];
-		int i;
-		heap->size--;
-    if (heap->size < sqrt(heap->capacity))
-                heap->capacity = sqrt(heap->capacity);
-		for(i=0;i<heap->size;i++){
-			heap->hnap[i]=heap->hnap[i+1];
-		}
-  // Heapify Down
-  int index = 0;
-  int n = heap->size;
-  HNODE val = heap->hnap[index];
-  int ci = (index << 1) + 1; 
-  while (ci <= n) { 
-    if ((ci < n) && (heap->hnap[ci].data < heap->hnap[ci+1].data))
-      ci++;  
-    if (heap->hnap[ci].data < val.data)
-      break;   
-    else {
-      heap->hnap[index] = heap->hnap[ci]; 
-      index = ci;
-      ci = (index << 1) + 1;
-      }
-    }
-    heap->hnap[index] = val;
-	}else{
-		printf("\nNo data\n");
 	}
-	return (*nh);
+	heap->hnap[heap->size] = new_node;
+	heap->size++;
+	int curr_index = heap->size - 1;
+	int parent_index = (curr_index - 1) / 2;
+	while (cmp(heap->hnap[curr_index].key, heap->hnap[parent_index].key) == -1) {
+		HNODE temp = heap->hnap[curr_index];
+		heap->hnap[curr_index] = heap->hnap[parent_index];
+		heap->hnap[parent_index] = temp;
+		curr_index = parent_index;
+		parent_index = (curr_index - 1) / 2;
+	}
 }
 
-
-void decrease_key(HEAP *heap, int node_index, KEYTYPE key_value)
-{
-    // your implementation
-    if(node_index>=0 && node_index<heap->size)
-    {
-        heap->hnap[node_index].key = key_value;
-        int size = (heap->size);
-        int parent;
-        HNODE val = heap->hnap[node_index];
-      while (size) {
-        parent = (size-1) >> 1;  //equivalent to parent = (index-1)/ 2;
-        if (heap->hnap[parent].key <= val.key) break;
-        else {
-          heap->hnap[node_index] = heap->hnap[parent];
-          size = parent;
-        }
-      }
-      heap->hnap[size] = val;
-    }
-    else
-    {
-        printf("\nIndex out of range\n");
-    }
+HNODE extract_min(HEAP *heap) {
+	HNODE min = heap->hnap[0];
+	heap->hnap[0] = heap->hnap[heap->size - 1];
+	heap->size--;
+	int curr_index = 0;
+	int child_index =
+			2 * curr_index + 2 < heap->size ?
+					cmp(heap->hnap[2 * curr_index + 1].key,
+							heap->hnap[2 * curr_index + 2].key) == -1 ?
+							2 * curr_index + 1 : 2 * curr_index + 2
+			:
+			2 * curr_index + 1 < heap->size ? 2 * curr_index + 1 : curr_index;
+	while (cmp(heap->hnap[curr_index].key, heap->hnap[child_index].key) == 1) {
+		// Swap the current node and its child node
+		HNODE temp = heap->hnap[curr_index];
+		heap->hnap[curr_index] = heap->hnap[child_index];
+		heap->hnap[child_index] = temp;
+		curr_index = child_index;
+		child_index =
+				2 * curr_index + 2 < heap->size ?
+						cmp(heap->hnap[2 * curr_index + 1].key,
+								heap->hnap[2 * curr_index + 2].key) == -1 ?
+								2 * curr_index + 1 : 2 * curr_index + 2
+				:
+				2 * curr_index + 1 < heap->size ?
+						2 * curr_index + 1 : curr_index;
+	}
+	if (heap->size < heap->capacity / 2) {
+		HNODE *temp;
+		heap->capacity /= 2;
+		temp = realloc(heap->hnap, sizeof(HNODE) * heap->capacity);
+		if (temp) {
+			heap->hnap = temp;
+		} else
+			temp = malloc(sizeof(HNODE) * heap->capacity);
+		if (temp) {
+			memcpy(temp, heap->hnap, sizeof(HNODE) * heap->size);
+			heap->hnap = temp;
+		} else
+			printf("Array resize failed\n");
+	}
+	return min;
 }
 
+void decrease_key(HEAP *heap, int node_index, KEYTYPE key_value) {
+	int p;
+	HNODE t;
+	if (heap->hnap[node_index].key > key_value) {
+		heap->hnap[node_index].key = key_value;
+		t = heap->hnap[node_index];
+		p = (node_index - 1) >> 1;
+		while (node_index > 0 && cmp(heap->hnap[p].key, key_value) > 0) {
+			heap->hnap[node_index] = heap->hnap[p];
+			node_index = p;
+			p = (node_index - 1) >> 1;
+		}
+		heap->hnap[node_index] = t;
+	}
+}
 
 int find_index(HEAP *heap, DATA value) {
-// your implementation
-int index=0;
-	while(index<heap->size && heap->hnap[index].data!=value){
-		index++;
-	}
-	if(index==heap->size){
-		printf("Data not found");
+	if (!heap)
 		return -1;
-	}else{
-		return index;
+	int index = 0;
+	HNODE *curr = &(heap->hnap[index]);
+	while (curr && index < heap->size) {
+		if (curr->data == value)
+			return index;
+		index++;
+		curr = &(heap->hnap[index]);
 	}
+	return -1;
 }
 
 void display_heap(HEAP *hp) {

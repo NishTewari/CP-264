@@ -4,7 +4,6 @@ Author: Nishant Tewari
 ID:     190684430
 Email:  tewa4430@mylaurier.ca
 __updated__ = "2021-04-02"
-
 -------------------------------------------------
 */ 
 #ifndef HEAP_H

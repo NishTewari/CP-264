@@ -6,27 +6,25 @@ Author:  Nish Tewari
 Version: 2021-04-09
 ---------------------------------------------------
 */
-
 #include <stdio.h>
 #include <stdlib.h> 
 #include "graph.h"
 
-
 GRAPH *new_graph(int order) {
   // your implementation
-  GRAPH *gp = (GRAPH*) malloc(sizeof(GRAPH));
-	gp->order = order;
-	gp->size = 0;
-	gp->nodes = malloc(order * sizeof(GNODE));
-	if (!gp)
+  GRAPH *gh = (GRAPH*) malloc(sizeof(GRAPH));
+	gh->order = order;
+	gh->size = 0;
+	gh->nodes = malloc(order * sizeof(GNODE));
+	if (!gh)
 		return NULL;
 	int i;
 	for (i = 0; i < order; i++){
-		gp->nodes[i] = malloc(sizeof(GNODE));
-		gp->nodes[i]->nid = i;
-		gp->nodes[i]->neighbor = NULL;
+		gh->nodes[i] = malloc(sizeof(GNODE));
+		gh->nodes[i]->nid = i;
+		gh->nodes[i]->neighbor = NULL;
 	}
-	return gp;
+	return gh;
   
 }
 
@@ -60,7 +58,6 @@ void add_edge(GRAPH *g, int from, int to, int weight) {
     g->size++;
   
 }
-
 
 void bf_traverse(GRAPH *g, int nid) {
   // your implementation
