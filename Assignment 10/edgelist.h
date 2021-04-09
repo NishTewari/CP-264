@@ -4,9 +4,8 @@ File:    edgelist.h
 Description: 
 Author:  Nish Tewari  
 Version: 2021-04-09
---------------------------------------------------
+---------------------------------------------------
 */
-
 #ifndef EDGELIST_H
 #define EDGELIST_H
 

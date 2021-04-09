@@ -5,9 +5,8 @@ File:    edgelist_main.c
 Description: public test driver
 Author:  Nish Tewari  
 Version: 2021-03-26
---------------------------------------------------
+---------------------------------------------------
 */
-
 #include <stdio.h>
 #include "edgelist.h"
 

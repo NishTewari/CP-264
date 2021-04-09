@@ -4,7 +4,7 @@ File:    graph.c
 Description: 
 Author:  Nish Tewari  
 Version: 2021-04-09
---------------------------------------------------
+---------------------------------------------------
 */
 
 #include <stdio.h>
@@ -13,25 +13,110 @@ Version: 2021-04-09
 
 
 GRAPH *new_graph(int order) {
-// your implementation
+  // your implementation
+  GRAPH *gp = (GRAPH*) malloc(sizeof(GRAPH));
+	gp->order = order;
+	gp->size = 0;
+	gp->nodes = malloc(order * sizeof(GNODE));
+	if (!gp)
+		return NULL;
+	int i;
+	for (i = 0; i < order; i++){
+		gp->nodes[i] = malloc(sizeof(GNODE));
+		gp->nodes[i]->nid = i;
+		gp->nodes[i]->neighbor = NULL;
+	}
+	return gp;
+  
+}
+
+ADJNODE* new_node(int nid, int weight) {
+    ADJNODE *np =(ADJNODE*) malloc(sizeof(ADJNODE));
+    if (np) {
+      np->nid = nid;
+      np->weight = weight;
+      np->next = NULL;
+    }
+    return np;
+
 }
 
 void add_edge(GRAPH *g, int from, int to, int weight) {
-// your implementation
+  // your implementation
+  if (!g)
+		return;
+    ADJNODE *cn = g->nodes[from]->neighbor;
+    ADJNODE *nn = new_node(to, weight);
+    if (g->nodes[from]->neighbor == NULL){
+        g->nodes[from]->neighbor = nn;
+        nn->next = NULL;
+    }
+    else {
+		while (cn->next != NULL ) {
+			cn = cn->next;
+		}
+        cn->next = nn;
+    }
+    g->size++;
+  
 }
 
 
 void bf_traverse(GRAPH *g, int nid) {
-// your implementation
+  // your implementation
+  if (g == NULL)
+		return;
+	int n = g->order, visited[n],i;
+	for (int i = 0; i<n;i++) visited[i]=0;
+	QUEUE q = {0};
+	GNODE *gn = NULL;
+	ADJNODE *an = NULL;
+	enqueue(&q, g->nodes[nid]);
+	visited[nid] = 1;
+	while(q.front){
+		gn = (GNODE*)dequeue(&q);
+		printf("%d ", gn->nid);
+		an = gn->neighbor;
+		while(an) {
+			i = an->nid;
+			if(visited[i] == 0){
+				enqueue(&q,g->nodes[i]);
+				visited[i] = 1;
+			}
+			an = an->next;
+		}
+	}
+	clean_queue(&q);
 }
 
 //use auxiliary stack data structure for the algorithm 
 void df_traverse(GRAPH *g, int nid) {
-// your implementation
+  // your implementation
+if (g == NULL)
+		return;
+	int n = g->order, visited[n],i;
+	for (int i = 0; i<n;i++) visited[i]=0;
+	STACK s = {0};
+	GNODE *gn = NULL;
+	ADJNODE *an = NULL;
+	push(&s, g->nodes[nid]);
+	visited[nid] = 1;
+	while(s.top){
+		gn = (GNODE*)peek(&s);
+		pop(&s);
+		printf("%d ", gn->nid);
+		an = gn->neighbor;
+		while(an) {
+			i = an->nid;
+			if(visited[i] == 0){
+				push(&s,g->nodes[i]);
+				visited[i] = 1;
+			}
+			an = an->next;
+		}
+	}
+	clean_stack(&s);
 }
-
-
-
 
 int get_weight(GRAPH *g, int from, int to) {
   ADJNODE *p = g->nodes[from]->neighbor;

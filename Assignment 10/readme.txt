@@ -37,9 +37,45 @@ Total:                                   [30/30/*]
 Copy and paste the console output of your public test in the following. This will help markers to evaluate your program if it fails the testing.  
 
 Q1 output:
+display_edgelist():
+size:4
+(from to weight):(0 2 3) (2 1 4) (1 3 9) (1 4 11)
+weight:27
 
 
 Q2 output:
+order:5
+size:12
+from:(to weight)
+0:(1 7) (2 3)
+1:(0 7) (2 4) (3 9) (4 11)
+2:(0 3) (1 4) (3 10)
+3:(2 10) (1 9)
+4:(1 11)
+bf_traverse():0 1 2 3 4
+df_traverse():0 2 3 1 4
 
 
 Q3 output:
+order:5
+size:12
+from:(to weight)
+0:(1 7) (2 3)
+1:(0 7) (2 4) (3 9) (4 11)
+2:(0 3) (1 4) (3 10)
+3:(2 10) (1 9)
+4:(1 11)
+
+mst_prim(g, 0):
+size:4
+(from to weight):(0 2 3) (2 1 4) (1 3 9) (1 4 11)
+mst weight:27
+
+spt_dijkstra():size:4
+(from to weight):(0 2 3) (0 1 7) (2 3 10) (1 4 11)
+spt weight:31
+
+sp_dijkstra(g 0 4):
+size:2
+(from to weight):(0 1 7) (1 4 11)
+sp length:18

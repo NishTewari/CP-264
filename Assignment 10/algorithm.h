@@ -4,9 +4,8 @@ File:    algorithm.h
 Description: 
 Author:  Nish Tewari  
 Version: 2021-04-09
---------------------------------------------------
+---------------------------------------------------
 */
-
 #ifndef ALGORITHM_H
 #define ALGORITHM_H
 

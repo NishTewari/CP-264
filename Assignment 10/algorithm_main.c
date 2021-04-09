@@ -1,13 +1,12 @@
 /*
---------------------------------------------------
+---------------------------------------------------
 Project: CP264-a10q3
 File:    algorithm_main.c 
 Description: public test driver
 Author:  Nish Tewari   
 Version: 2021-04-07
---------------------------------------------------
+---------------------------------------------------
 */
-
 #include <stdio.h>
 #include "edgelist.h"
 #include "graph.h"
